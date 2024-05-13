@@ -1,11 +1,21 @@
 import * as React from 'react';
-import {Text, View, StyleSheet, TextInput, TouchableOpacity} from 'react-native';
-import {BORDERRADIUS, COLORS, FONTFAMILY, FONTSIZE, SPACING} from '../theme/Theme';
+import {
+  Text,
+  View,
+  StyleSheet,
+  TextInput,
+  TouchableOpacity,
+} from 'react-native';
+import {
+  BORDERRADIUS,
+  COLORS,
+  FONTFAMILY,
+  FONTSIZE,
+  SPACING,
+} from '../theme/Theme';
 import CustomIcon from './CustomIcon';
 
-interface InputHeader {}
-
-const InputHeader = () => {
+const InputHeader = (props: any) => {
   const [searchText, setSearchText] = React.useState<string>('');
 
   return (
@@ -15,10 +25,14 @@ const InputHeader = () => {
         onChangeText={textInput => setSearchText(textInput)}
         placeholder="Search your movies..."
         placeholderTextColor={COLORS.whiteRGBA32}
+        value={searchText}
       />
-      <TouchableOpacity style={styles.searchIcon}>
+      <TouchableOpacity
+        style={styles.searchIcon}
+        onPress={() => props.searchFunction(searchText)}>
         <CustomIcon name="search" color={COLORS.orange} size={25} />
       </TouchableOpacity>
+      <Text style={{color: COLORS.white}}>{searchText}</Text>
     </View>
   );
 };
